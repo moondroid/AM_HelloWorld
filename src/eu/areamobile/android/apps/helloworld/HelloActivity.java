@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+// we must extends FragmentActivity to use fragments
 public class HelloActivity extends FragmentActivity implements OnClickListener{
 	public final static String EXTRA_NAME = "eu.areamobile.extras.FULL_NAME";
 	
@@ -29,13 +30,15 @@ public class HelloActivity extends FragmentActivity implements OnClickListener{
 	public void onClick(View v) {
 		Log.d("TEST", "Clicked!!!");
 		
+		// we use getFragmentManager to obtain the fragment reference;
+		// getSupportFragmentManager is used for compatibility with older Android API
 		FragmentManager m=getSupportFragmentManager();
 		InputFragment f=(InputFragment)m.findFragmentById(R.id.InputFragment);
 		String fullName = f.getFullName();
 		
 		Log.d("TEST", "Input was: "+fullName);
 		
-		
+		// Intent is used to start a second activity and pass the fullName string 
 		final Intent intent = new Intent(this,SecondActivity.class);
 		intent.putExtra(EXTRA_NAME, fullName);
 		startActivity(intent);
